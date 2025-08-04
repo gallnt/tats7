@@ -18,6 +18,7 @@
 \RequirePackage{algpseudocode}
 \RequirePackage[english]{babel}
 \RequirePackage[most]{tcolorbox}
+\RequirePackage{titlepic}
 \RequirePackage[margin=1in]{geometry}
 
 % Formatting tweaks
