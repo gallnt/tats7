@@ -1,1 +1,120 @@
 \section{Basic Descriptive Techniques}
+
+Statistical techniques for analyzing time series vary from relatively straightforward descriptive techniques to sophisticated inferential techniques. This chapters introduces the former. Descriptive techniques should be tried before attempting more complicated procedures, because they are important in `cleaning' the data, and then getting a `feel' for them, before trying to generate ideas as regards to a suitable model.
+
+This chapter focuses on ways of understanding typical time-series effects, such as trend, seasonality, and correlations betyween successive observations.
+
+
+
+% ----------2.1----------
+\subsection{Types of Variation}
+Traditional methods of time-series analysis are mainly concerned with decomposing the variation in a series into components representing trend, seasonal variation and other cyclic changes. Any remaining variation is attributed to `irregular' fluctuations. This approach is not always the best but is particularly valuable when the variation is dominated by trend and seasonality. 
+
+\textit{Seasonal variation}
+Many time series, such as sales figures and temperature readings, exhibit variation that is annual in period. For example, unemployment is typically `high' in winter but low in summer. This yearly variation is easy to understand, and can readily be estimated if seasonality is of direct interest. Alternatively, seasonal variation can be removed from the data to give deseasonalized data.
+
+\textit{Other cyclic variations}
+Apart from seasonal effects, there are some other variations of time series at a fixed period due to some other physical cause. For example, daily variations in temperature depend on what time of the day it is. 
+
+\textit{Trend}
+This may be loosely defined as `long-term change in the mean level'. However, this largely depends how we define the term `long-term'. It can be a year to even 50 years depending on the span of the time series.
+
+\textit{Other irregular fluctutations}
+After trend and cyclic variations have been removed from a set of data, we are left with residuals that may or may not be `random'. We'll examine later whether this can be explained in terms of probability models, such as the moving average (MA) or autoregressive (AR) models.
+
+
+
+% ----------2.2----------
+\subsection{Stationary Time Series}
+Broadly speaking a time series is said to be stationary if there is no systematic change in mean (no trend), if there is no systematic change in variance and if strictly periodic variations have been removed. In other words, the properties of one section of the data are much like those of any ohter section.
+
+Much of the probability theory of time series is concerned with stationary time series, and for this reason time series analysis often requires one to transform a non-stationary time series to a stationary one so as to use the theory. For example, we can remove the trend and seasonality and model the resuals by a stationary stochastic process. However, sometimes we may be more interested in the non-stationary components too!
+
+
+
+% ----------2.3----------
+\subsection{The Time Plot}
+Ths first, and most important, step in any time-series analysis is to plot the observations against time. This grap, called the time plot, will show up important features of the series such as trend, seasonality, outliers and discontinuities. 
+
+Plotting a time series is not as easy as is sounds. The choice of scales, siz eof intercept, way that points are plotted may substantially affect the way the plot looks. Not all computer software plots the time series well, so we'll have to adjust manually sometimes.
+
+
+
+% ----------2.4----------
+\subsection{Transformations}
+Plotting the data may suggest that it is reasonable to transform them by, for example, taking logs or square roots. The three main reasons for making a transformation are as follows:
+
+\textit{(i) To stabilize the variance}
+
+If there is a trend in the series and the variance appears to increase with the mean, they it may be advisable to transform the data. In particular, if the standard deviation is directly proportional to the mean, a logarithmic transformation is indicated. On the other hand, if the variance changes through time without a trend being present, then a transformation will not help.
+
+\textit{(ii) To make the seasonal effect additive}
+
+If there is a trend in the series and the size of the seasonal eﬀect appears to increase with the mean, then it may be advisable to transform the data so as to make the seasonal eﬀect constant from year to year. The seasonal effect is then said to be additive. In particular, if the size of the seasonal eﬀect is directly proportional to the mean, then the seasonal effect is said to be multiplicative and a logarithmic transformation is appropriate to make the effect additive. However, this transformation will only stabilize the variance if the error term is also thought to be multiplicative (see Section 2.6), a point that is sometimes overlooked.
+
+\textit{(iii) To make the data normally distributed}
+
+Model building and forecasting are usually carried out on the assumption that the data are normally distributed. In practice this is not necessarily the case; there may, for example, be evidence of skewness in that there tend to be `spikes' in the time plot that are all in the same direction (either up or down). This effect can be diffcult to eliminate with a transformation and it may be necessary to model the data using a different ‘error’ distribution.
+
+The logarithmic and square root transformations above are special cases of a general class of transformations called the Box-Cox transformation. Given an observed time series $\{ x_t \}$ and a transformation parameter $\lambda$, the transformed series is given by 
+\[ y_t = \begin{cases}
+	(x_t^\lambda - 1) / \lambda &\text{ if } \lambda \neq 0, \\
+	\log_{}{(x_t)} &\text{ if } \lambda = 0.
+\end{cases}
+\]
+The best value of $\lambda$ is usually `guesstimated'. 
+
+However, Nelson and Granger (1979) found that there is little
+improvement in forecast performance when a general Box–Cox transformation
+was tried on a number of series. There are cases where the transformation fails to stabilize the variance. Usually, transformations should be avoided wherever possible
+except where the transformed variable has a direct physical interpretation.
+For example, when percentage increases are of interest, then taking logarithms
+makes sense.
+
+
+
+
+% ----------2.5----------
+\subsection{Analyzing Series that Contain a Trend and No Seasonal Variation}
+The simplest type of trend is the familiar `linear trend + noise', for which the observation at time $t$ is a random variable $X_t$ given by 
+\[ X_t = \alpha + \beta t + \varepsilon_t, \]
+where $\alpha, \beta$ are constants and $\varepsilon_t$ denotes a random error term with zero mean. The mean level at time $t$ is given by $m_t = \alpha + \beta t$; which is some times called the `trend term'. However, some authors denote $\beta$ as the trend so it depends on the context.
+
+The trend above is a deterministic function of time and is
+sometimes called a global linear trend. In practice, this generally provides
+an unrealistic model, and nowadays there is more emphasis on models that
+allow for local linear trends. One possibility is to fit a piecewise linear
+model where the trend line is locally linear but with change points where the
+slope and intercept change (abruptly). We can also assume that $\alpha, \beta$ evolve stochastically, giving rise to a stochastic trend.
+
+Now we describe some methods to describing the trend.
+
+
+\subsubsection{Curve Fitting}
+A traditional method of dealing with non-seasonal data with a trend is to fit a simple function such as a polynomial, a Gompertz curve, or a logistic curve. The Gompertz curve can be written in the form
+\[ \log_{}{x_t} = a + br^t \]
+where $a, b, r$ are parameters with $0 < r < 1$, or in the alternative form of 
+\[ x_t = \alpha \exp{[\beta \exp{(-\gamma t)}]}, \]
+which is equivalent as long as $\gamma > 0$. The logistic curve is given by 
+\[ x_t = a / (1 + be^{-ct}). \]
+For curves of this type, the fitted function provides a measure of the trend, and the residuals provide an estimate of local fluctuations.
+
+
+\subsubsection{Filtering}
+A second procedure for dealing with a trend is by using a \underline{linear filter}, which converts a time series $\{ x_t \}$ into another time series $\{ y_t \}$ by the linear operation 
+\[ y_t = \sum_{r = -q}^{s} a_rx_{t+r}, \]
+where $\{ a_r \}$ are a set of weights. In order to smooth out local fluctuations and estimate the local mean, we should clearly choose the weights so that $\Sigma a_r = 1$, and the operation is referred as the \underline{moving average}.
+
+Moving averages are often symmetric with $s = q$ and $a_j = a_{-j}$. The simplest example of a moving average is a symmetric moving average, defined by 
+\[ \mathrm{Sm}(x_t) = \frac{1}{2q + 1}\sum_{r = -q}^{+q} x_{t+r}. \]
+The simple moving average is not generally recommended by itself for measuring trend, although it can be useful for removing seasonal variation.
+
+Another example is to take $\{ a_r \}$ to be successive terms in the expansion of $(\frac{1}{2} + \frac{1}{2})^{2q}$. As $q$ gets large, the weights approximate a normal curve.
+
+A third example is \underline{Spencer's 15-point moving average}, which is used for smoothing mortality statistics to get life tables. This covers 15 consecutive points with $q = 7$, and the symmetric weights are 
+\[ \frac{1}{320} [ -3,-6,-5,3,21,46,67,74,67,46,21,\dots ] \]
+
+A fourth example is the \underline{Henderson moving average}. This moving average aims to follow a cubic polynomial trend without distortion, and the choice of $q$ depends on the degree of irregularity. The symmetric nine-term moving average, for example, is given by
+\[ [-0.041, -0.010, 0.119, 0.267, 0.330, \dots] \]
+
+To demonstrate this effect of moving averages, we use the Beveridge wheat price annual index series from 1500 to 1869 as an example (Figure 1.1 link).

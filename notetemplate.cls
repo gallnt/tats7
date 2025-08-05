@@ -16,10 +16,15 @@
 \RequirePackage{enumitem}
 \RequirePackage{algorithm}
 \RequirePackage{algpseudocode}
+\RequirePackage{listings}
 \RequirePackage[english]{babel}
 \RequirePackage[most]{tcolorbox}
-\RequirePackage{titlepic}
+\RequirePackage[parfill]{parskip}
 \RequirePackage[margin=1in]{geometry}
+
+\RequirePackage{chngcntr}
+\counterwithin{figure}{section}
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}
 
 % Formatting tweaks
 \renewcommand{\labelenumi}{(\alph{enumi})}
