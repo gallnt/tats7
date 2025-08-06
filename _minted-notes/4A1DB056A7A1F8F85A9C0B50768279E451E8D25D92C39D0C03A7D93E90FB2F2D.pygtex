@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{sp500}\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nf}{read.csv}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}mydata/sp500\PYGZbs{}\PYGZus{}ret\PYGZbs{}\PYGZus{}1995\PYGZhy{}2016.csv\PYGZdq{}}\PYG{p}{)}
-\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{n}\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nf}{nrow}\PYG{p}{(}\PYG{n}{sp500}\PYG{p}{)}
-\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{x.pos}\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nf}{c}\PYG{p}{(}\PYG{n+nf}{seq}\PYG{p}{(}\PYG{l+m}{1}\PYG{p}{,}\PYG{n}{n}\PYG{p}{,}\PYG{l+m}{800}\PYG{p}{),}\PYG{n}{n}\PYG{p}{)}
-\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n+nf}{plot}\PYG{p}{(}\PYG{n}{sp500}\PYGZbs{}\PYG{o}{\PYGZdl{}}\PYG{n}{Return}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{type}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}l\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{xlab}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}Day\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{ylab}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}Daily return\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{xaxt}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}n\PYGZdq{}}\PYG{p}{)}
-\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n+nf}{axis}\PYG{p}{(}\PYG{l+m}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{x.pos}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{sp500}\PYGZbs{}\PYG{o}{\PYGZdl{}}\PYG{n}{Date}\PYG{p}{[}\PYG{n}{x.pos}\PYG{p}{])}
-\end{Verbatim}

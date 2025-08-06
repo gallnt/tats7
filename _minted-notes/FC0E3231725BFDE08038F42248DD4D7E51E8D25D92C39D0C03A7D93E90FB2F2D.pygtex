@@ -1,0 +1,36 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{smooth.sym}\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{k+kr}{function}\PYG{p}{(}\PYG{n}{my.ts}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{window.q}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{window.size}\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{l+m}{2}\PYG{o}{*}\PYG{n}{window.q}\PYG{l+m}{+1}
+\PYG{+w}{    }\PYG{n}{my.ts.sm}\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nf}{rep}\PYG{p}{(}\PYG{l+m}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nf}{length}\PYG{p}{(}\PYG{n}{my.ts}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{n}{window.size}\PYG{p}{)}
+\PYG{+w}{    }\PYG{k+kr}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{i}\PYG{+w}{ }\PYG{k+kr}{in}\PYG{+w}{ }\PYG{l+m}{1}\PYG{o}{:}\PYG{n+nf}{length}\PYG{p}{(}\PYG{n}{my.ts.sm}\PYG{p}{))}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{my.ts.sm}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nf}{mean}\PYG{p}{(}\PYG{n}{my.ts}\PYG{p}{[}\PYG{n}{i}\PYG{o}{:}\PYG{p}{(}\PYG{n}{i}\PYG{o}{+}\PYG{n}{window.size}\PYG{l+m}{\PYGZhy{}1}\PYG{p}{)])}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{n}{my.ts.sm}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{c+c1}{\PYGZsh{} moving average with equal and symmetric weights}
+
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{smooth.spencer}\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{k+kr}{function}\PYG{p}{(}\PYG{n}{my.ts}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{weight}\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nf}{c}\PYG{p}{(}\PYG{l+m}{\PYGZhy{}3}\PYG{p}{,}\PYG{l+m}{\PYGZhy{}6}\PYG{p}{,}\PYG{l+m}{\PYGZhy{}5}\PYG{p}{,}\PYG{l+m}{3}\PYG{p}{,}\PYG{l+m}{21}\PYG{p}{,}\PYG{l+m}{46}\PYG{p}{,}\PYG{l+m}{67}\PYG{p}{,}\PYG{l+m}{74}\PYG{p}{,}\PYG{l+m}{67}\PYG{p}{,}\PYG{l+m}{46}\PYG{p}{,}\PYG{l+m}{21}\PYG{p}{,}\PYG{l+m}{3}\PYG{p}{,}\PYG{l+m}{\PYGZhy{}5}\PYG{p}{,}\PYG{l+m}{\PYGZhy{}6}\PYG{p}{,}\PYG{l+m}{\PYGZhy{}3}\PYG{p}{)}\PYG{o}{/}\PYG{l+m}{320}
+\PYG{+w}{    }\PYG{n}{my.ts.sm}\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nf}{rep}\PYG{p}{(}\PYG{l+m}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nf}{length}\PYG{p}{(}\PYG{n}{my.ts}\PYG{p}{)}\PYG{l+m}{\PYGZhy{}15}\PYG{p}{)}
+\PYG{+w}{    }\PYG{k+kr}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{i}\PYG{+w}{ }\PYG{k+kr}{in}\PYG{+w}{ }\PYG{l+m}{1}\PYG{o}{:}\PYG{n+nf}{length}\PYG{p}{(}\PYG{n}{my.ts.sm}\PYG{p}{))}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{	  }\PYG{n}{my.ts.sm}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nf}{sum}\PYG{p}{(}\PYG{n}{my.ts}\PYG{p}{[}\PYG{n}{i}\PYG{o}{:}\PYG{p}{(}\PYG{n}{i}\PYG{l+m}{+14}\PYG{p}{)]}\PYG{o}{*}\PYG{n}{weight}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{n}{my.ts.sm}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{c+c1}{\PYGZsh{} Spencer’s 15\PYGZhy{}point moving average}
+
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n+nf}{library}\PYG{p}{(}\PYG{n}{tseries}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n+nf}{data}\PYG{p}{(}\PYG{n}{bev}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{bev.sm}\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nf}{smooth.sym}\PYG{p}{(}\PYG{n}{bev}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m}{7}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{bev.spencer}\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nf}{smooth.spencer}\PYG{p}{(}\PYG{n}{bev}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{x.pos}\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nf}{c}\PYG{p}{(}\PYG{l+m}{1500}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m}{1560}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m}{1620}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m}{1680}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m}{1740}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m}{1800}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m}{1869}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n+nf}{par}\PYG{p}{(}\PYG{n}{mfrow}\PYG{o}{=}\PYG{n+nf}{c}\PYG{p}{(}\PYG{l+m}{3}\PYG{p}{,}\PYG{l+m}{1}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{mar}\PYG{o}{=}\PYG{n+nf}{c}\PYG{p}{(}\PYG{l+m}{4}\PYG{p}{,}\PYG{l+m}{4}\PYG{p}{,}\PYG{l+m}{4}\PYG{p}{,}\PYG{l+m}{4}\PYG{p}{))}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n+nf}{plot}\PYG{p}{(}\PYG{n}{bev}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{type}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}l\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{xlab}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}Year\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{ylab}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}Index\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{xaxt}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}n\PYGZdq{}}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n+nf}{axis}\PYG{p}{(}\PYG{l+m}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{x.pos}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{x.pos}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n+nf}{plot}\PYG{p}{(}\PYG{n+nf}{c}\PYG{p}{(}\PYG{l+m}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nf}{length}\PYG{p}{(}\PYG{n}{bev}\PYG{p}{)),}\PYG{+w}{ }\PYG{n+nf}{c}\PYG{p}{(}\PYG{l+m}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nf}{max}\PYG{p}{(}\PYG{n}{bev}\PYG{p}{)),}\PYG{+w}{ }\PYG{n}{type}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}n\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{xlab}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}Year\PYGZdq{}}\PYG{p}{,}
+\PYG{n}{ylab}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}Index\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{xaxt}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}n\PYGZdq{}}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n+nf}{lines}\PYG{p}{(}\PYG{n+nf}{seq}\PYG{p}{(}\PYG{l+m}{8}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nf}{length}\PYG{p}{(}\PYG{n}{bev}\PYG{p}{)}\PYG{l+m}{\PYGZhy{}8}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{bev.sm}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n+nf}{axis}\PYG{p}{(}\PYG{l+m}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{x.pos}\PYG{l+m}{\PYGZhy{}1500+1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{x.pos}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n+nf}{plot}\PYG{p}{(}\PYG{n+nf}{c}\PYG{p}{(}\PYG{l+m}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nf}{length}\PYG{p}{(}\PYG{n}{bev}\PYG{p}{)),}\PYG{+w}{ }\PYG{n+nf}{c}\PYG{p}{(}\PYG{l+m}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nf}{max}\PYG{p}{(}\PYG{n}{bev}\PYG{p}{)),}\PYG{+w}{ }\PYG{n}{type}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}n\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{xlab}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}Year\PYGZdq{}}\PYG{p}{,}
+\PYG{n}{ylab}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}Index\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{xaxt}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}n\PYGZdq{}}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n+nf}{lines}\PYG{p}{(}\PYG{n+nf}{seq}\PYG{p}{(}\PYG{l+m}{8}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nf}{length}\PYG{p}{(}\PYG{n}{bev}\PYG{p}{)}\PYG{l+m}{\PYGZhy{}8}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{bev.spencer}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n+nf}{axis}\PYG{p}{(}\PYG{l+m}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{x.pos}\PYG{l+m}{\PYGZhy{}1500+1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{x.pos}\PYG{p}{)}
+\end{Verbatim}

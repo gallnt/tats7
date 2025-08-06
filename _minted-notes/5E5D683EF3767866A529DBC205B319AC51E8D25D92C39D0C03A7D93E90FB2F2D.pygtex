@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{wine}\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nf}{read.csv}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}../data/aus\PYGZbs{}\PYGZus{}wine\PYGZbs{}\PYGZus{}sales.csv\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{header}\PYG{o}{=}\PYG{n+nb+bp}{F}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{wine.ts}\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nf}{ts}\PYG{p}{(}\PYG{n}{wine}\PYG{p}{[,}\PYG{l+m}{2}\PYG{p}{],}\PYG{+w}{ }\PYG{n}{frequency}\PYG{o}{=}\PYG{l+m}{4}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{start}\PYG{o}{=}\PYG{n+nf}{c}\PYG{p}{(}\PYG{l+m}{1985}\PYG{p}{,}\PYG{l+m}{1}\PYG{p}{))}
+\PYG{c+c1}{\PYGZsh{} create a time series object}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{wine.de}\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nf}{decompose}\PYG{p}{(}\PYG{n}{wine.ts}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{type}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}additive\PYGZdq{}}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n+nf}{plot}\PYG{p}{(}\PYG{n}{wine.de}\PYG{p}{)}
+\end{Verbatim}
