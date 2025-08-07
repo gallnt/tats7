@@ -32,7 +32,7 @@
 \setlength{\parindent}{0pt}
 
 \theoremstyle{definition}
-\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{theorem}{Theorem}[section]
 \newtheorem{example}[theorem]{Example}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{corollary}[theorem]{Corollary}

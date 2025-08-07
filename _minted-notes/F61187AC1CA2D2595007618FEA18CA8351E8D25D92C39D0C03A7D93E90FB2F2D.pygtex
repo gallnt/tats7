@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{z}\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nf}{rnorm}\PYG{p}{(}\PYG{l+m}{500}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m}{1}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n+nf}{par}\PYG{p}{(}\PYG{n}{mfrow}\PYG{o}{=}\PYG{n+nf}{c}\PYG{p}{(}\PYG{l+m}{2}\PYG{p}{,}\PYG{l+m}{1}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{mar}\PYG{o}{=}\PYG{n+nf}{c}\PYG{p}{(}\PYG{l+m}{3}\PYG{p}{,}\PYG{l+m}{4}\PYG{p}{,}\PYG{l+m}{3}\PYG{p}{,}\PYG{l+m}{4}\PYG{p}{))}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n+nf}{plot}\PYG{p}{(}\PYG{n}{z}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{type}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}l\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{xlab}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}Time\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{ylab}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}Series\PYGZdq{}}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n+nf}{acf}\PYG{p}{(}\PYG{n}{z}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{xlab}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}Lag\PYGZdq{}}\PYG{p}{,}\PYG{n}{ylab}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}ACF\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{main}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{)}
+\end{Verbatim}

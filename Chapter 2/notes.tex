@@ -414,9 +414,31 @@ Considerable experience is required to interpret sample autocorrelation coeffici
 \subsection{Other Tests of Randomness}
 In most cases, visual examination is enough to determine that the series is NOT random (there is trend/seasonality/short-term correlation). However, we can occasionally test whether the apparent stationary time series it `random'. One type of approach is to carry out the test of randomness in which we test whether the observations $x_1, \dots, x_N$ could have arisen in that order by chance. We'll mention a few such tests here. 
 
+One type of test is based on counting the number of \textit{turning points}, meaning the number of times there is a local maximum or minimum in the time series. If the series is really random, one can work out the expected number of turning points and compare it with the observed value.
+
+An alternative type of test is based on \textit{runs} of observations. For example, the analyst can count the number of runs where successive observations are all greater than the median or all less than the median, which may indicate short-term correlation. Or they can cout the number of runs of monotonicity, which may incidate trend.
+
+Tests above are not covered in the book, since examining the correlogram is sufficient and simple enough. If a test is required though, the pormanteau test is mentioned in Section 4.7, which is based on testing for residuals.
+
 
 
 % ----------2.9----------
 \subsection{Handling Real Data}
+We'll close on how to handle real data. When receiving the data, we can't assume that it's structured well already, hence we will have to clean the data first, for example: Modifying outliers, correcting obvious errors, and filling in (imputing) missing observations. The analyst should also deal with any other known peculiarities, such as a change in the way that a variable is defined during the course of the data collection process.
 
+After cleaning the data, the next step for the time-series analyst is to determine whether trend and seasonality are present. If so, how shold such eefects be modelled, measured, or removed? The treatment of such effects and missing values is often more important than the analysis and modeling of the time-series data.
+
+The context of the problem is crucial in deciding how to modify data, if at all, and how to handle trend and seasonality. Therefore it is essential to get background knowledge about the problem.
+
+We close by giving a non-exhaustive list of possible actions, and can be adapted to the particular problem:
+\begin{itemize}
+	\item Do you understand the context? Have the `right' variables been measured?
+	\item Have all the time series been plotted?
+	\item Are there any missing values? If so, what should be done about them?
+	\item Are there any outliers? If so, what should be done about them?
+	\item Are there any obvious discontinuities in the data? If so, what does this mean?
+	\item Does it make sense to transform any of the variables?
+	\item Is trend present? If so, what should be done about it?
+	\item Is seasonality present? If so, what should be done about it?
+\end{itemize}
 
