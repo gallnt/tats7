@@ -554,5 +554,328 @@ This does not affect the ac.f. (Exercise 3.4).
 
 % ----------3.8----------
 \subsection{Mixed ARMA Models}
+A useful class of models for time series is formed by combining AR and MA processes:
+\begin{definition*}[]
+
+A \underline{mixed autoregressive moving average process} containing $p$ AR terms and $q$ MA terms is said to be 
+an ARMA process or order $(p, q)$. It is given by 
+\[ X_t = \alpha_1 X_{t-1} + \cdots + \alpha_p X_{t-p} + Z_t + \beta_1 Z_{t-1} + \cdots + \beta_q Z_{t-q}, \]
+where $\{ Z_t \}$ is a purely random process with mean zero and variance $\sigma_Z^2$.
+\end{definition*}
+
+Using the backshift operator, we can rewrite the above as
+\[ \phi(B)X_t = \theta(B) Z_t. \]
+where $\phi(B), \theta(B)$ are polynomials of order $p,q$ respectively, such that 
+\[ \phi(B) = 1 - \alpha_1 B - \cdots - \alpha_p B^p \]
+and 
+\[ \theta(B) = 1 + \beta_1 B + \cdots + \beta_q B^q. \]
 
 
+\subsubsection{Stationarity and invertibility conditions}
+The conditions to make the process stationary and invertible are those combined for the pure AR and pure MA 
+processes. This means the roots for the equation 
+\[ \phi(B) = 0, \theta(B) = 0 \]
+all lie outside the unit circle. In is straightforward in principle, though algebraically tedious, to calculate 
+the ac.f. of an ARMA process. This is not discussed in the text (Exercise 3.11).
+
+The importance of ARMA processes lies in the fact that a stationary time series may often be adequately modelled 
+by an ARMA model involving fewer parameters than a pure MA or AR process by itself. This is an early example of
+what is often called the Principle of Parsimony. This says that we want to find a model with as few parameters 
+as possible, but which gives an adequate representation of the data at hand.
+
+
+\subsubsection{Yule-Walker equations and autocorrelations}
+The ac.f. of an ARMA process can be found using similar procedures as for AR processe. First, multiply through 
+the ARMA equation by $X_{t-k}$ and take expectations. Note that, for $k > q$, $Z_t, \dots, Z_{t-q}$ are 
+independent of $X_{t-k}$. Hence the expected values of $Z_tX_{t-k}, \dots, Z_{t-q}X_{t-k}$ are all zero. 
+If $k \geq p$, we can further divide both sides of the equation by $\gamma(0)$, then we get the Yule-Walker 
+equations for the general $\mathrm{ARMA}(p, q)$ process
+\[ \rho(k) = \alpha_1 \rho(k-1) + \cdots + \alpha_p \rho(k - p), \ k \geq \max_{}(p, q + 1). \]
+Note that the form is the exact same as that of a pure AR process, but the initial conditions are different. 
+Here is an example of how to compute the ac.f.:
+
+\begin{example}[]
+
+Consider the $\mathrm{ARMA}(1, 1)$ process
+\[ X_t = \alphaX_{t-1} + Z_t + \beta Z_{t-1},  \]
+where $|\alpha|, |\beta| < 1$. To derive the ac.f. of the process, the Yule-Walker equations are 
+\[ \rho(k) = \alpha \rho(k-1), \ k \geq 2. \]
+To obtain the initial conditions, we note that $\gamma(1)$ can be computed as follows:
+\begin{align*}
+	\gamma(1) 
+	&= \mathrm{Cov}(X_t, X_{t-1}) \\
+	&= \mathrm{Cov}(\alpha X_{t-1} + Z_t + \beta Z_{t-1}, X_{t-1}) \\
+	&= \alpha \gamma(0) + \beta \mathrm{Cov}(Z_{t-1}, X_{t-1}) \\
+	&= \alpha \gamma(0) + \beta \mathrm{Cov}(Z_{t-1}, \alpha X_{t-2} + Z_t + \beta Z_{t-2}) \\
+	&= \alpha \gamma(0) + \beta \sigma_Z^2.
+\end{align*}
+The variance of $X_t$, or $\gamma(0)$, can be calculated as follows:
+\begin{align*}
+	\gamma(0) 
+	&= \mathrm{Var}(\alpha X_{t-1} + Z_t + \beta Z_{t-1}) \\
+	&= \mathrm{Cov}(\alpha X_{t-1} + Z_t + \beta Z_{t-1}, \alpha X_{t-1} + Z_t + \beta Z_{t-1}) \\
+	&= \alpha^2 \gamma(0) + (1 + \beta^2)\sigma_Z^2 + 2 \alpha \beta \mathrm{Cov}(X_{t-1}, Z_{t-1}) \\
+	&= \alpha^2 \gamma(0) + (1 + 2 \alpha \beta + \beta^2)\sigma_Z^2.
+\end{align*}
+Solving for $\gamma(0)$ gives 
+\[ \gamma(0) = \frac{1 + 2 \alpha \beta + \beta^2}{1 - \alpha^2} \sigma_Z^2. \]
+Thewn plugging this into the equation for $\gamma(1)$ gives 
+\[ \gamma(1) = \frac{(1 + \alpha \beta)(\alpha + \beta)}{1 - \alpha^2}\sigma_Z^2. \]
+Therefore, 
+\[ \rho(1) = \frac{\gamma(1)}{\gamma(0)} = \frac{(1 + \alpha \beta)(\alpha + \beta)}
+{1 + 2 \alpha \beta + \beta^2}. \]
+USing the Yule-Walker equations, we then have 
+\[ \rho(k) = \frac{\gamma(1)}{\gamma(0)} = \frac{(1 + \alpha \beta)(\alpha + \beta)}
+{1 + 2 \alpha \beta + \beta^2} \alpha^{k - 1}, \ k \geq 1. \]
+\end{example}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\textwidth]{Chapter 3/fig3-6.png}
+	\caption{Two simulated ARMA processes and their correlograms. Top: $X_t = 0.7X_{t-1} + Z_t - 0.4Z_{t-1}$; 
+	Bottom: $X_t = 0.9X_{t-1} - 0.5X_{t-2} + Z_t - 0.2Z_{t-1} + 0.25Z_{t-2}$, $Z_t \sim N(0, 0.5)$.}
+	\label{fig:3.6}
+\end{figure}
+
+In principle, the ac.f. for a general ARMA process can be computed, but are usually more complicated than for 
+AR processes. \cref{fig:3.6} above shows two simulated AR processes and their correlograms using the following 
+piece of code:
+\begin{minted}{R}
+> x1<-arima.sim(n=500, list(ar=0.7, ma=-0.4))
+> x2<-arima.sim(n=500, list(ar=c(0.9,-0.5), ma=c(-0.2,0.25)), sd=sqrt(0.5))
+\end{minted}
+
+Note that, though the correlogram of the ARMA(2, 2) process in \cref{fig:3.6} looks like that from the AR(2) 
+process in \cref{fig:3.5}, these processes are completely different!
+
+
+\subsubsection{AR and MA representations}
+We can express ARMA processes as a pure MA process or a pure AR process: 
+\[ X_t = \psi(B)Z_t \text{ or } \pi(B) X_t = Z_t, \]
+where 
+\[ \psi(B) = \sum_{i = 0}^{\infty} \psi_i B^i \text{ and } \pi(B) = 1 - \sum_{i = 1}^{\infty} \pi_i B^i. \]
+We can immediately get that
+\[ \pi(B) \psi(B) = 1. \]
+The weights of $\psi$ or $\pi$ can be obtained directly by division or by equating powers of $B$ in an equation 
+such as
+\[ \psi(B) \phi(B) = \theta(B). \]
+
+\begin{example}[]
+Find the $\psi$ weights and $\pi$ weights for the ARMA(1, 1) process given by 
+\[ X_t = 0.5X_{t-1} + Z_t - 0.3Z_{t-1}. \]
+Here $\phi(B) = 1 - 0.5B$ and $\theta(B) = 1 - 0.3B$. It follows that the process is stationary and invertible, 
+because both equations have roots greter than one. Then 
+\begin{align*}
+	\psi(B)
+	&= \theta(B) / \phi(B) \\
+	&= (1 - 0.3B) (1 - 0.5B)^{-1} \\
+	&= (1 - 0.3B))(1 + 0.5B + 0.5^2 B^2 + \cdots) \\
+	&= 1 + 0.2B + 0.1B^2 + 0.05B^2 + \cdots
+\end{align*}
+Hence 
+\[ \psi_0 = 1, \ \psi_i = 0.2 \times 0.5^{i - 1} \text{ for } i = 1, 2, \dots \]
+Similarly, we find 
+\[ \pi_0 = 1, \ \pi_i = 0.2 \times 0.3^{i - 1} \text{ for } i = 1, 2, \dots \]
+Note that both the $\psi$ and the $\pi$ weights die away quickly, and this also indicates a stationary, 
+invertible process.
+\end{example}
+
+
+
+% ----------3.9----------
+\subsection{Integrated ARMA (or ARIMA) Models}
+In practice most time series are non-stationary. If the time series is non-stationary in the mean, then we can 
+difference the series, as suggested in Section 2.5.3. 
+
+\begin{definition*}[]
+Set 
+\[ W_t = \nabla^d X_t = (1 - b)^d X_t, \ d = 0, 1, 2, \dots \]
+The \underline{autoregressive integrated moving average (ARIMA)} process of order $(p,d,q)$ is of the form
+\[ W_t = \alpha_1 W_{t-1} + \cdots + \alpha_pW_{t-p} + Z_t + \beta_1Z_{t-1} + \cdots + \beta_1 Z_{t-q}. \]
+\end{definition*}
+
+Of course, we can write the above using backshift operators:
+\[ \phi(B) W_t = \theta(B) Z_t \]
+or 
+\[ \phi(B)(1 - B)^d X_t = \theta(B) Z_t. \]
+
+The model for $X_t$ is clearly non-stationary, as the AR operator has $d$ roots on the unit circle. For example, 
+the random walk can be regarded as an ARIMA(0, 1, 0) process, which is non-stationary. Applying the difference 
+operator once makes the process stationary.
+
+\cref{fig:3.7} shows a simulated ARIMA(1, 1, 1) and a simmmulated ARIMA(1, 1, 2) process via theh following 
+piece of code:
+\begin{minted}{R}
+> y1<-arima.sim(list(order=c(1,1,1), ar=-0.5, ma=-0.3), n=500)
+> y2<-arima.sim(list(order=c(1,1,2), ar=0.3, ma=c(-0.3,0.5)), n=500)
+\end{minted}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\textwidth]{Chapter 3/fig3-7.png}
+	\caption{Two simulated ARIMA processes and their correlograms. Top: $(1 + 0.5B)(1-B)X_t = (1 + 0.3B)Z_t$; 
+	Bottom: $(1 - 0.6B)(1 - B)X_t = (1 - 0.3B + 0.5B^2)Z_t$.}
+	\label{fig:3.7}
+\end{figure}
+
+ARIMA models can be generalized to include seasonal terms, which will be discussed in Section 4.8.
+
+
+
+% ----------3.10----------
+\subsection{Fractional Differencing and Long-Memory Models}
+An interesting variant of ARIMA modeling arises with the use of fractional differencing, leading to a fractional 
+integrated ARMA model:
+\begin{definition*}[]
+A \underline{fractional integrated ARMA (ARFIMA)} process is a process defined by 
+\[ \phi(B)(1 - B)^d X_t = \theta(B) Z_t, \]
+where $\phi(B)$ and $\theta(B)$ are polynomials of oreder $p, q$ respectively, and $d$ does not need to be an 
+integer.
+\end{definition*}
+
+When $d$ is not an integer, then the $d$th difference $(1 - B)^d X_t$ becomes a fractional difference, and may 
+be represented by its binomial expansion, namely 
+\[ (1 - B)^d X_t = \left[ 1 - dB + \frac{d(d - 1)}{2!}B^2 - \frac{d(d-1)(d-2)}{3!}B^3 + \cdots \right] \]
+As such, it is an infinite weighted sum of past values.
+
+It can be shown (Brockwell \& Davis, 1991, Section 13.2) that an ARFIMA process is stationary provided that 
+$-0.5 < d < 0.5$. For $d > 1/2$, the processes is not stationary in the usual sense, but further integer 
+differencing can be used to give a stationary ARFIMA process. For example, first differencing of an 
+$\mathrm{ARFIMA}(p, d=1.3, q)$ process gives a stationary $\mathrm{ARFIMA}(p, d=0.3, q)$ process.
+
+A stationary ARFIMA model with $0 < d < 0.5$, is of particular interest as such a process is not only 
+stationary, but is also an exmaple of a \textbf{long-memory model}. This means the correlations decay to zero 
+very slowly.
+
+\begin{definition*}[]
+A stationary process with ac.f. $\rho(k)$ is a \underline{long-memory process} if 
+\[ \sum_{k = 0}^{\infty} |\rho(k)| \]
+does not converge.
+\end{definition*}
+
+In particular, the latter condition applies when the ac.f. is of the form $\rho(k) \sim Ck^{2d - 1}$ as 
+$k \to \infty$, where $X$ is a nonzero constant, and $0 < d < 0.5$. It can be shown that a stationary ARFIMA 
+model with differencing parameter $d$ in the range $0 < d < 0.5$, as an ac.f. $\rho_k$ whose limiting form has 
+the required structure.
+
+As an example, \cref{fig:3.8} shows a simulated $\mathrm{ARFIMA}(1, d=0.4, 2)$ series, 
+\[ (1 - 0.3B)(1 - B)^d X_t = (1 - 0.3B + 0.5B^2)Z_t, \ Z_t \sim N(0, 0.2^2), \]
+and its correlogram in R. Note that a specific package, fracdiff, needs to be loaded before calling the function 
+fracdiff.sim.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{Chapter 3/fig3-8.png}
+	\caption{A simulated $\mathrm{ARFIMA}(1, d=0.4, 2)$ process, $(1 - 0.3B)(1 - B)^d X_t 
+	= (1 - 0.3B + 0.5B^2)Z_t$ with $Z_t \sim N(0, 0.04)$, and its correlogram.}
+	\label{fig:3.8}
+\end{figure}
+
+In contrast, the ac.f. of a stationary ARMA process satisfies the condition that $|\rho(k)| < C \lambda^k$, 
+where $C$ is a constant and $0 < \lambda < 1$. Thus there correlations are absolutely summable and such 
+processes may be called short-memory models.
+
+Long-memory models have a number of interesting features, especially for forecasting. In time-series analysis, 
+the variance of a sample mean can be expressed as 
+\[ \frac{\sigma_Z^2}{N} [1 + 2 \sum_{k = 1}^{N - 1} \left( 1 - \frac{k}{n} \right) \rho(k)]; \]
+see Section 4.1.2. When the correlationas are positive, as they usually are, the latter expression can be much 
+larger then $\sigma^2 / N$, especially for long-memory processes where the correlations die out slowly. In 
+contrast to this result, it is intuitively clear that the larger and longer lasting the autocorrelations, the 
+better will be the forecasts of the model. It can be shown both theoretically and practically (Bera, 1994, 
+Section 8.7), but is not shown in this book.
+
+\textit{A long-memory (stationary) process and a non-stationary process}
+
+It's hard to distinguish between a long-memory (stationary) process and a non-stationary process. A feature of 
+both models is that the empirical ac.f. will die out slowly and the spectrum will large at zero frequency. 
+\cref{fig:3.9} shows a demonstration. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{Chapter 3/fig3-9.png}
+	\caption{A simulated non-stationary process and a simulated $\mathrm{ARFIMA}(1, d=0.45, 2)$ process and 
+	their correlograms. Top: $(1 - 0.3B)(1 - B)X_t = (1 + 0.9B)Z_t$; Bottom: $(1 - 0.3B)(1 - B)^d X_t 
+	= (1 - 0.3B + 0.5B^2) Z_t$, $Z_t \sim N(0, 1)$.}
+	\label{fig:3.9}
+\end{figure}
+
+Both the series themselves and their correlograms look quite similar. Therefore, given a set of data with these 
+properties which seems to be non-stationary, it may be worth considering a fractional ARIMA model with 
+$0 < d < 1$, as well as an ordinary model with $d = 1$. Now the question: will the resulting forecasts likely to 
+be better than those from alternative models? Currently research is still being done on this subject.
+
+
+
+% ----------3.11----------
+\subsection{The General Linear Process}
+\begin{definition*}[]
+A stationary process is called a \underline{general linear process} is it can be written as an MA process, i.e. 
+\[ X_t = \sum_{i = 0}^{\infty} \psi_i Z_{t-i}. \]
+\end{definition*}
+A sufficient condition for the sum to converge, and hence for the process to be stationary, is that the 
+coefficients are absolutely summable. Of course, stationary AR and ARMA processes can also be expressed as a 
+general linear process using the duality between AR and MA processes.
+
+
+
+% ----------3.12----------
+\subsection{Continuous Processes}
+Let's give a brief introduction in the difficulties of continuous time series.
+
+As an example, we consider a first-order AR process in continuous time. A first order AR process in discrete 
+time can be rewritten as 
+\[ X_t = \alpha_{t - 1} + Z_t \implies (1 - \alpha)X_t + \alpha \nabla X_t = Z_t, \ \nabla X_t = 
+(1 - B)X_t. \]
+Differencing in discrete time corresponds to differentiation in continuous time, hence a natural way to define 
+an AR(1) process in continuous time is via the equation 
+\[ aX(t) + \frac{dX(t)}{dt} = Z(t), \]
+where $a$ is a constant, and $Z(t)$ denotes continuous white noise. However, $\{ Z(t) \}$ cannot physically 
+exist, hence let's rewrite the above:
+\[ dX(t) = -aX(t)dt + dU(t) \]
+where $\{ U(t) \}$ is a process with orthogonal increments such that the random variables $U(t_2) - U(t_1)$ and 
+$U(t_4) - U(t_3)$ are uncorrelated for any two non-overlapping intervals $(t_1, t_2)$ and $(t_3, t_4)$. In the 
+theory of Brownian motion, this is within the Ornstein-Uhlenbeck model and is sometimes called the Langevin 
+equation. It can be shown that the process defined above has the ac.f. 
+\[ \rho(\tau) = e^{-a |\tau|}, \]
+which is similar to the ac.f. of an AR(1) process in discrete time in that both decay exponentially.
+
+Rigorous studies of continuous process require considerable mathematical theory, including a knowledge of 
+stochastic integration. Hence this is not covered in this book.
+
+
+
+% ----------3.13----------
+\subsection{The Wold Decomposition Theorem}
+The Wold Decomposition Theorem is mostly of theoretical interest.
+
+\begin{theorem*}[Wold's Decomposition]
+Any discrete-time weakly stationary process can be expressed as the sum of a deterministic and a stochastic 
+time series, i.e.
+\[ X_t = \sum_{j = 0}^{\infty} b_j \varepsilon_{t - j} + \eta_t. \]
+where 
+\begin{itemize}
+	\item $X_t$ is the time series being considered, 
+	\item $\varepsilon_t$ is an uncorrelated sequence which is the innovation process of $X_t$,
+	\item $b$ is the \textit{possibly infinite} vector of moving average weights, 
+	\item $\eta_t$ is a deterministic time series, in the sense that it is completely determined as a linear 
+	combination of its past values.	
+\end{itemize}	
+\end{theorem*}
+
+While the concept of a purely indeterministic process may sometimes be helpful, the Wold decomposition itself 
+can be of little assistance. For a linear purely indeterministic process like AR or ARMA, trying an 
+$\mathrm{MA}(\infty)$ model is inappropriate, since there are too many parameters to estimate. For processes 
+generated in a nonlinear way, the Wold decomposition is usually even of lest interest, as the best predictor 
+is often nonlinear.
+
+For example, consider 
+\[ X_t = g \cos{(\omega t + \theta)}, \]
+where $g$ is a constant, $\omega \in (0, \pi)$ is the frequency of the process, and $\theta \sim 
+\mathrm{Unif}(0, 2 \pi)$ is a random variable, called the phase. Note that we need the term $\theta$ so that 
+\[ \mathbb{E}\left[ X_t \right] = 0 \text{ for all } t. \]
+If this is not done, $X_t$ will not be stationary.
+
+As $\theta$ is fixed for a single realization, once enough value of $X_t$ have been observed to evaluate 
+$\theta$, all subsequent values of $X_t$ are determined. Then we can see that $X_t$ defines a deterministic 
+process. However, it is not `purely deterministic' because it is nonlinear. In fact, it is `purely stochastic' 
+using a linear predictor!

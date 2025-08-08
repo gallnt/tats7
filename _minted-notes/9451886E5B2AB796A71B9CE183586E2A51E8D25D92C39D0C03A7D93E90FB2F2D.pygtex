@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{x1}\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nf}{arima.sim}\PYG{p}{(}\PYG{n}{n}\PYG{o}{=}\PYG{l+m}{500}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nf}{list}\PYG{p}{(}\PYG{n}{ar}\PYG{o}{=}\PYG{l+m}{0.7}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{ma}\PYG{o}{=}\PYG{l+m}{\PYGZhy{}0.4}\PYG{p}{))}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{x2}\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nf}{arima.sim}\PYG{p}{(}\PYG{n}{n}\PYG{o}{=}\PYG{l+m}{500}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nf}{list}\PYG{p}{(}\PYG{n}{ar}\PYG{o}{=}\PYG{n+nf}{c}\PYG{p}{(}\PYG{l+m}{0.9}\PYG{p}{,}\PYG{l+m}{\PYGZhy{}0.5}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{ma}\PYG{o}{=}\PYG{n+nf}{c}\PYG{p}{(}\PYG{l+m}{\PYGZhy{}0.2}\PYG{p}{,}\PYG{l+m}{0.25}\PYG{p}{)),}\PYG{+w}{ }\PYG{n}{sd}\PYG{o}{=}\PYG{n+nf}{sqrt}\PYG{p}{(}\PYG{l+m}{0.5}\PYG{p}{))}
+\end{Verbatim}

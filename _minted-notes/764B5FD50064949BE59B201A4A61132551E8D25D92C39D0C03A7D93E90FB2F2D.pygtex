@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{y1}\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nf}{arima.sim}\PYG{p}{(}\PYG{n+nf}{list}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{n+nf}{c}\PYG{p}{(}\PYG{l+m}{1}\PYG{p}{,}\PYG{l+m}{1}\PYG{p}{,}\PYG{l+m}{1}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{ar}\PYG{o}{=}\PYG{l+m}{\PYGZhy{}0.5}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{ma}\PYG{o}{=}\PYG{l+m}{\PYGZhy{}0.3}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{n}\PYG{o}{=}\PYG{l+m}{500}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{y2}\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nf}{arima.sim}\PYG{p}{(}\PYG{n+nf}{list}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{n+nf}{c}\PYG{p}{(}\PYG{l+m}{1}\PYG{p}{,}\PYG{l+m}{1}\PYG{p}{,}\PYG{l+m}{2}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{ar}\PYG{o}{=}\PYG{l+m}{0.3}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{ma}\PYG{o}{=}\PYG{n+nf}{c}\PYG{p}{(}\PYG{l+m}{\PYGZhy{}0.3}\PYG{p}{,}\PYG{l+m}{0.5}\PYG{p}{)),}\PYG{+w}{ }\PYG{n}{n}\PYG{o}{=}\PYG{l+m}{500}\PYG{p}{)}
+\end{Verbatim}
